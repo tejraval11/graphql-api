@@ -1,0 +1,151 @@
+{
+    "info": {
+      "name": "GraphQL API Collection",
+      "description": "Collection to test GraphQL API for user operations",
+      "_postman_id": "e9f0f964-d982-4995-8a10-76c8316025fb",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Create User",
+        "request": {
+          "url": {
+            "raw": "http://localhost:4000/graphql",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "4000",
+            "path": [
+              "graphql"
+            ]
+          },
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"query\":\"mutation { createUser(email: \\\"newuser@example.com\\\", password: \\\"password123\\\") { id email createdAt updatedAt } }\"}"
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Login",
+        "request": {
+          "url": {
+            "raw": "http://localhost:4000/graphql",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "4000",
+            "path": [
+              "graphql"
+            ]
+          },
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"query\":\"mutation { login(email: \\\"newuser@example.com\\\", password: \\\"password123\\\") }\"}"
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Get All Users",
+        "request": {
+          "url": {
+            "raw": "http://localhost:4000/graphql",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "4000",
+            "path": [
+              "graphql"
+            ]
+          },
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"query\":\"query { users { id email createdAt updatedAt } }\"}"
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Update User",
+        "request": {
+          "url": {
+            "raw": "http://localhost:4000/graphql",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "4000",
+            "path": [
+              "graphql"
+            ]
+          },
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"query\":\"mutation { updateUser(id: 1, email: \\\"updated@example.com\\\") { id email updatedAt } }\"}"
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Clear Users",
+        "request": {
+          "url": {
+            "raw": "http://localhost:4000/graphql",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "4000",
+            "path": [
+              "graphql"
+            ]
+          },
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"query\":\"mutation { clearUsers }\"}"
+          }
+        },
+        "response": []
+      }
+    ]
+  }
+  
