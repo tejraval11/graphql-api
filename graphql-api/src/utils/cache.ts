@@ -1,8 +1,8 @@
 import { createClient } from 'redis';
 
-// Connect to Redis running in Docker container using the container name
+
 const redisClient = createClient({
-  url: 'redis://localhost:6379'  // Correct - Use the Docker service name "redis"
+  url: 'redis://localhost:6379' 
 });
 
 
@@ -14,7 +14,7 @@ redisClient.on('error', (err) => {
   console.error('Redis error:', err);
 });
 
-redisClient.connect();  // Connect to Redis
+redisClient.connect();  
 
 export const setCache = async (key: string, value: any, ttl: number) => {
   await redisClient.set(key, JSON.stringify(value), { EX: ttl });

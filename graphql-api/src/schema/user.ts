@@ -2,8 +2,8 @@ export const typeDefs = `
   type User {
     id: Int!
     email: String!
-    createdAt: String!   # Represent as formatted string (e.g., ISO 8601 format)
-    updatedAt: String!   # Represent as formatted string (e.g., ISO 8601 format)
+    createdAt: String!  
+    updatedAt: String!  
   }
 
   type Query {

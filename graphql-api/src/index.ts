@@ -7,34 +7,34 @@ import { userResolvers } from './resolvers/user';
 import { verifyToken } from './utils/auth';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-dotenv.config();  // This loads the environment variables from the .env file
+dotenv.config();
 
-const SECRET_KEY : any= process.env.SECRET_KEY;  // Now you can access process.env.SECRET_KEY
+const SECRET_KEY : any= process.env.SECRET_KEY; 
 
-const app: any = express();  // Initialize express app
+const app: any = express();  
 
-// Create HTTP server from Express app
+
 const httpServer = createServer(app);
 
-// Initialize Socket.IO with Express server using configureSocket
-const io = configureSocket(httpServer);  // Use configureSocket to set up io
 
-// Middleware for JWT Authentication in Socket.IO
+const io = configureSocket(httpServer);  
+
+
 io.use((socket : any, next : any) => {
   const token = socket.handshake.auth.token;
   if (!token) {
     return next(new Error("Authentication error: Token is required"));
   }
   try {
-    const user = jwt.verify(token, SECRET_KEY); // Use a secure key in production
-    socket.user = user; // Attach user details to the socket object
+    const user = jwt.verify(token, SECRET_KEY);
+    socket.user = user; 
     next();
   } catch (err) {
     return next(new Error("Authentication error: Invalid token"));
   }
 });
 
-// Initialize Apollo Server with Express
+
 const server = new ApolloServer({
   typeDefs,
   persistedQueries: false,
@@ -42,17 +42,16 @@ const server = new ApolloServer({
   introspection: true,
   context: ({ req }) => {
     const token = req.headers.authorization || "";
-    const user = verifyToken(token.replace("Bearer ", ""));  // Verify token
-    return { user, io };  // Pass io to context
+    const user = verifyToken(token.replace("Bearer ", ""));  
+    return { user, io }; 
   },
 });
 
-// Start Apollo Server
+
 server.start().then(() => {
-  // Apply Apollo Server middleware to the Express app
+
   server.applyMiddleware({ app });
 
-  // Start the server with Socket.IO and Apollo
   httpServer.listen(4000, () => {
     console.log(`Server ready at http://localhost:4000${server.graphqlPath}`);
     console.log(`Socket.IO ready at http://localhost:4000`);

@@ -1,4 +1,3 @@
-// src/resolvers/user.ts
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -34,8 +33,8 @@ export const userResolvers = {
 
       return users.map((user) => ({
         ...user,
-        createdAt: user.createdAt.toISOString(),  // Convert Date to ISO string
-        updatedAt: user.updatedAt.toISOString(),  // Convert Date to ISO string
+        createdAt: user.createdAt.toISOString(),  
+        updatedAt: user.updatedAt.toISOString(),  
       }));
       return users;
     }),
@@ -66,7 +65,7 @@ export const userResolvers = {
       io.emit("newUser", { id: newUser.id, email: newUser.email });
       console.log("New user created and event emitted:", { id: newUser.id, email: newUser.email });
 
-      // Return the user including the createdAt and updatedAt fields
+     
       return {
         id: newUser.id,
         email: newUser.email,
@@ -96,10 +95,10 @@ export const userResolvers = {
 
     clearUsers: async () => {
       try {
-        // Delete all users from the database
+        
         await prisma.user.deleteMany();
 
-        // Reset the auto-increment sequence for the 'id' column in PostgreSQL
+        
         await prisma.$executeRaw`ALTER SEQUENCE "User_id_seq" RESTART WITH 1`;
 
         return "All users deleted successfully, and ID sequence has been reset.";
@@ -112,10 +111,10 @@ export const userResolvers = {
     updateUser: errorHandler(async (_: any, { id, email }: { id: number; email: string }, { io }: any) => {
       const updatedUser = await prisma.user.update({
         where: {
-          id: id,  // Ensure id is passed as an integer
+          id: id, 
         },
         data: {
-          email: email,  // Dynamically set the email passed in the mutation
+          email: email,  
         },
       });
       io.emit("userUpdated", { id: updatedUser.id, email: updatedUser.email });
