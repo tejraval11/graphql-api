@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/realtime/socket.ts","./src/resolvers/user.ts","./src/schema/user.ts","./src/utils/auth.ts","./src/utils/cache.ts","./src/utils/errorhandler.ts"],"errors":true,"version":"5.7.2"}
